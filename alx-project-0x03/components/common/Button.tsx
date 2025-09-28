@@ -1,14 +1,26 @@
-type ButtonProps = {
-    label: string;
-    onClick?: () => void;
-};
-
-export default function Button({ label, onClick }: ButtonProps) {
-    return (
-        <button onClick={onClick}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
-        >
-            {label}
-        </button>
-    );
+interface ButtonProps {
+    buttonLabel: string
+    buttonSize?: string
+    buttonBackgroundColor?: 'red' | 'blue' | 'orange' | 'green'
+    action?: () => void
 }
+
+const Button = ({ buttonLabel, buttonSize, buttonBackgroundColor, action }: ButtonProps) => {
+    const backgroundColorClass = buttonBackgroundColor ? {
+        red: 'bg-red-500',
+        blue: 'bg-blue-500',
+        orange: 'bg-orange-500',
+        green: 'bg-green-500',
+    }[buttonBackgroundColor] : 'bg-slate-500'
+
+    return (
+        <button
+            onClick={action}
+            className={`${backgroundColorClass} ${buttonSize} px-6 py-2 text-sm font-semibold rounded-lg hover: ${backgroundColorClass}/50 transition duration-300 text-white`}
+        >
+
+        </button>
+    )
+}
+
+export default Button
